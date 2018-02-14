@@ -15,20 +15,17 @@ function func_uniform(n, runs, callback) {
     }
     let estimated = Math.sqrt(Math.PI * n / 2)
     let calculated = (results / runs)
-
     callback(estimated, calculated)
 }
 //This is for Q.2 , runs is for running the calculation multiple times to reduce deviation
 function func_coupon(n, runs, callback) {
     let estimated = 0;
+    let arr_copy = []
     for (let i = 1; i < n + 1; i++) {
         estimated += 1 / i;
+        arr_copy.push(i-1)
     }
     estimated = estimated * n;
-    let arr_copy = []
-    for (let i = 0; i < n; i++) {
-        arr_copy.push(i)
-    }
     let arr = []
     let calculated = 0;
     for (let i = 0; i < runs; i++) {
@@ -43,14 +40,12 @@ function func_coupon(n, runs, callback) {
     }
     callback(estimated, calculated / runs)
 }
-
 //This is for making a deck for Q.3
 function func_make_deck(suits, numbers, callback) {
     let deck = [];
     suits.forEach(suit => {
         for (let i = 1; i < numbers + 1; i++) {
             deck.push({ suit: suit, numb: i });
-
         };
     });
     callback(suits, deck)
@@ -60,17 +55,14 @@ function func_shuffle(deck, callback) {
     for (let i = 0; i < deck.length; i++) {
         deck.splice(Math.floor(Math.random() * deck.length), 0, deck.pop());
         deck.splice(Math.floor(Math.random() * deck.length), 0, deck.shift());
-
     }
     callback(deck)
 }
 //This is for sorting the Deck in Q.3
 function func_sort(suits, deck, callback) {
     for (let i = 1; i < deck.length; i++) {
-
         let current = deck[i];
         let otherCard = deck[i - 1];
-
         if (i == 0) {
             //do nothing
         }
@@ -95,12 +87,13 @@ func_make_deck(["spade", "heart", "club", "diamond"], 13, (suits, deck) => {
     })
 })
 //This is for Q.1 and Q.2
-//Lefthand is n, the higher it is, the more accurate it becomes.
-//Rightside is for how many times it should be run, the higher it is the less deviation there is.
-func_uniform(1000, 1000, (estimated, calculated) => {
-    console.log("Estimated: " + estimated, "     Calculated: " + calculated, "          % diff: " + Math.floor(100 * (1 - estimated / calculated)) + "%");
+//(n,runs,callback)
+func_uniform(1000, 10000, (estimated, calculated) => {
+    console.log("Estimated: " + estimated, "     Calculated: " + calculated, 
+    "          % diff: " + Math.floor(10000 * (1 - estimated / calculated))/100 + "%");
 })
 func_coupon(1000, 1000, (estimated, calculated) => {
-    console.log("Estimated: " + estimated, "     Calculated: " + calculated, "          % diff: " + Math.floor(100 * (1 - estimated / calculated)) + "%");
+    console.log("Estimated: " + estimated, "     Calculated: " + calculated,
+    "          % diff: " + Math.floor(10000 * (1 - estimated / calculated))/100 + "%");
 })
 
