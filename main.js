@@ -1,3 +1,4 @@
+//This is for Q.1
 function func_uniform(n,callback) {
     let results = 0;
     let runs = 1000;
@@ -17,7 +18,7 @@ function func_uniform(n,callback) {
     let calculated = (results / runs)
     callback(estimated,calculated)
 }
-
+//This is for Q.2
 function func_coupon(n,callback){
 let estimated = 0;
 for (let i = 1; i < n+1; i++) {
@@ -39,6 +40,7 @@ while(arr.length != 0){
 }
 callback(estimated,calculated)
 }
+//This is for running Q.1 and Q.2 multiple times to reduce deviations
 function func_esti(n,runs){
     let total_est = 0;
     let total_cal = 0;
@@ -59,7 +61,7 @@ function func_esti(n,runs){
     }
     console.log("coupon: estimated: " + total_est, "     calculated: " + total_cal,"          % diff: "+ Math.floor(100*(1-total_est/total_cal)) +"%");
 }
-
+//This is for making a deck for Q.3
 function func_make_deck(suits,numbers,callback){
     let deck = [];
 suits.forEach(suit => {
@@ -70,6 +72,7 @@ suits.forEach(suit => {
 });
 callback(suits,deck)
 }
+//This for randomizing the order of the Cards in the Deck for Q.3
 function func_shuffle(deck,callback){
 for (let i = 0; i < deck.length; i++) {
     deck.splice(Math.floor(Math.random()*deck.length),0,deck.pop());
@@ -78,6 +81,7 @@ for (let i = 0; i < deck.length; i++) {
 }
 callback(deck)
 }
+//This is for sorting the Deck in Q.3
 function func_sort(suits,deck,callback){
 for (let i =1; i < deck.length; i++) {
     
@@ -98,13 +102,17 @@ for (let i =1; i < deck.length; i++) {
 }
 callback(deck);
 }
+//This is for making, shuffling and sorting the deck
 func_make_deck(["spade","heart","club","diamond"],13,(suits,deck)=>{
-    func_shuffle(deck,(res)=>{
-        console.log(res)
-        func_sort(suits,res,(sorted)=>{
+    func_shuffle(deck,(unsorted)=>{
+        console.log(unsorted)
+        func_sort(suits,unsorted,(sorted)=>{
             console.log(sorted)
         })
     })
 })
+//This is for Q.1 and Q.2
+//Lefthand is n, the higher it is, the more accurate it becomes.
+//Rightside is for how many times it should be run, the higher it is the less deviation there is.
 func_esti(1000,30)
 
