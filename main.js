@@ -90,10 +90,10 @@ func_make_deck(["spade", "heart", "club", "diamond"], 13, (suits, deck) => {
 //(n,runs,callback)
 func_uniform(1000, 10000, (estimated, calculated) => {
     console.log("Estimated: " + estimated, "     Calculated: " + calculated, 
-    "          % diff: " + Math.floor(10000 * (1 - estimated / calculated))/100 + "%");
+    "          % diff: " + Math.floor(10000 * Math.abs(estimated - calculated)/((estimated+calculated)/2))/100 + "%");
 })
 func_coupon(1000, 1000, (estimated, calculated) => {
     console.log("Estimated: " + estimated, "     Calculated: " + calculated,
-    "          % diff: " + Math.floor(10000 * (1 - estimated / calculated))/100 + "%");
+    "          % diff: " + Math.floor(10000 * Math.abs(estimated - calculated)/((estimated+calculated)/2))/100 + "%");
 })
 
